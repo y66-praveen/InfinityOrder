@@ -3,65 +3,124 @@
 
 const DATA = {
   "Main MCU": [
-    { title: "Iron Man", type: "movie", year: 2008, month: 5, desc: "A billionaire weapons manufacturer builds a high-tech suit of armor after a life-changing incident and sets out to right his past mistakes." },
-    { title: "The Incredible Hulk", type: "movie", year: 2008, month: 6, desc: "A scientist on the run tries to control the rage-fueled creature within him while evading a relentless military pursuit." },
-    { title: "Iron Man 2", type: "movie", year: 2010, month: 5, desc: "With his secret out, a hero faces new rivals, a personal health crisis, and a government eager to control his technology." },
-    { title: "Thor", type: "movie", year: 2011, month: 5, desc: "A proud warrior prince is banished to Earth and must learn humility before he can reclaim his power and his home." },
-    { title: "Captain America: The First Avenger", type: "movie", year: 2011, month: 7, desc: "A frail young man is transformed into a super-soldier to fight in World War II against a ruthless enemy organization." },
-    { title: "The Avengers", type: "movie", year: 2012, month: 5, desc: "Earth's mightiest heroes are assembled for the first time to stop an other-worldly invasion threatening the planet." },
-    { title: "Iron Man 3", type: "movie", year: 2013, month: 5, desc: "Haunted by past events, a hero must rely on his own resourcefulness after his world is torn apart by a mysterious terrorist." },
-    { title: "Thor: The Dark World", type: "movie", year: 2013, month: 11, desc: "An ancient enemy threatens the Nine Realms, forcing an uneasy alliance to prevent universal destruction." },
-    { title: "Captain America: The Winter Soldier", type: "movie", year: 2014, month: 4, desc: "A soldier uncovers a conspiracy within the very organization he serves, while facing a deadly assassin from his past." },
-    { title: "Guardians of the Galaxy", type: "movie", year: 2014, month: 8, desc: "A group of misfit outlaws band together to stop a fanatic from acquiring a powerful artifact and endangering the galaxy." },
-    { title: "Avengers: Age of Ultron", type: "movie", year: 2015, month: 5, desc: "A team's attempt to create a peacekeeping program backfires, unleashing an artificial intelligence bent on its own agenda." },
-    { title: "Ant-Man", type: "movie", year: 2015, month: 7, desc: "A former thief gains a size-changing suit and must master it to pull off a high-stakes heist for the greater good." },
-    { title: "Captain America: Civil War", type: "movie", year: 2016, month: 5, desc: "A rift among heroes over accountability and freedom forces old allies onto opposing sides of a devastating conflict." },
-    { title: "Doctor Strange", type: "movie", year: 2016, month: 11, desc: "A brilliant but arrogant surgeon discovers a hidden world of mysticism after a tragic accident changes his path forever." },
-    { title: "Guardians of the Galaxy Vol. 2", type: "movie", year: 2017, month: 5, desc: "The team faces new threats and old family ties as one member's true origins come to light." },
-    { title: "Spider-Man: Homecoming", type: "movie", year: 2017, month: 7, desc: "A young hero balances high school life with the pressure to prove himself against a dangerous new threat in his city." },
-    { title: "Thor: Ragnarok", type: "movie", year: 2017, month: 11, desc: "Stripped of his power and stranded far from home, a hero must find a way back to stop the destruction of his world." },
-    { title: "Black Panther", type: "movie", year: 2018, month: 2, desc: "A new king returns home to a technologically advanced nation and must defend it from a challenger with a personal grudge." },
-    { title: "Avengers: Infinity War", type: "movie", year: 2018, month: 4, desc: "Heroes from across the galaxy unite to stop a powerful being from acquiring all six Infinity Stones." },
-    { title: "Ant-Man and the Wasp", type: "movie", year: 2018, month: 7, desc: "A hero teams up with a new partner on a rescue mission that plunges them into the mysterious quantum realm." },
-    { title: "Captain Marvel", type: "movie", year: 2019, month: 3, desc: "A former Air Force pilot discovers extraordinary powers and gets caught up in an intergalactic conflict with a hidden past." },
-    { title: "Avengers: Endgame", type: "movie", year: 2019, month: 4, desc: "The remaining heroes attempt one last mission to undo the devastation caused by their greatest defeat." },
-    { title: "Spider-Man: Far From Home", type: "movie", year: 2019, month: 7, desc: "A young hero's school trip abroad is interrupted when he's recruited to face a new elemental threat." },
-    { title: "WandaVision", type: "show", year: 2021, month: 1, desc: "Two former Avengers find their lives take a strange, sitcom-style turn in a seemingly perfect suburban town." },
-    { title: "The Falcon and the Winter Soldier", type: "show", year: 2021, month: 3, desc: "Two allies team up on a global mission that tests their partnership and forces them to confront a legacy left behind." },
-    { title: "Loki Season 1", type: "show", year: 2021, month: 6, desc: "A mischievous god finds himself recruited by a mysterious agency that polices time itself, with unexpected consequences." },
-    { title: "Black Widow", type: "movie", year: 2021, month: 7, desc: "A former spy confronts a dangerous conspiracy tied to her past, and family ties she thought she'd left behind." },
-    { title: "Shang-Chi and the Legend of the Ten Rings", type: "movie", year: 2021, month: 9, desc: "A man is drawn back into a hidden world of martial arts and confronts a legacy connected to his father's secret organization." },
-    { title: "Eternals", type: "movie", year: 2021, month: 11, desc: "An ancient group of immortal beings reunite after centuries apart to face a threat to humanity's very existence." },
-    { title: "Hawkeye", type: "show", year: 2021, month: 11, desc: "A veteran archer teams up with a determined young protégé while untangling a dangerous mess from his past." },
-    { title: "Spider-Man: No Way Home", type: "movie", year: 2021, month: 12, desc: "A spell gone wrong tears open the multiverse, bringing new dangers and unexpected faces into a young hero's life." },
-    { title: "Moon Knight", type: "show", year: 2022, month: 3, desc: "A man grappling with blackouts and lost memories discovers he shares his body and mind with another personality." },
-    { title: "Doctor Strange in the Multiverse of Madness", type: "movie", year: 2022, month: 5, desc: "A sorcerer journeys through the dangers of the multiverse to protect a young woman with a mysterious ability." },
-    { title: "Ms. Marvel", type: "show", year: 2022, month: 6, desc: "A New Jersey teenager and superhero fan discovers she has real powers of her own and must learn to use them." },
-    { title: "Thor: Love and Thunder", type: "movie", year: 2022, month: 7, desc: "A hero's search for inner peace is interrupted by a galactic killer targeting gods, and a familiar face returns." },
-    { title: "She-Hulk: Attorney at Law", type: "show", year: 2022, month: 8, desc: "A lawyer must balance her career and personal life after gaining powerful abilities of her own." },
-    { title: "Werewolf by Night", type: "show", year: 2022, month: 10, desc: "A secret society of monster hunters gathers for a deadly competition following the death of their leader." },
-    { title: "Black Panther: Wakanda Forever", type: "movie", year: 2022, month: 11, desc: "A nation mourns a great loss while facing a new underwater threat that puts the world at risk." },
-    { title: "The Guardians of the Galaxy Holiday Special", type: "show", year: 2022, month: 11, desc: "The team attempts to give one of their own a perfect, if unconventional, holiday gift." },
-    { title: "Ant-Man and the Wasp: Quantumania", type: "movie", year: 2023, month: 2, desc: "A family is pulled into the quantum realm and must contend with a powerful and dangerous new adversary." },
-    { title: "Guardians of the Galaxy Vol. 3", type: "movie", year: 2023, month: 5, desc: "The team goes on one final mission to protect one of their own from a painful past that catches up with them." },
-    { title: "Secret Invasion", type: "show", year: 2023, month: 6, desc: "A veteran agent uncovers a secret infiltration years in the making that threatens the security of the entire planet." },
-    { title: "Loki Season 2", type: "show", year: 2023, month: 10, desc: "The fallout from a fractured timeline forces old allies to fight to save the organization that governs time." },
-    { title: "The Marvels", type: "movie", year: 2023, month: 11, desc: "Three heroes with entangled powers must team up after they start unintentionally swapping places with each other." },
-    { title: "Echo", type: "show", year: 2024, month: 1, desc: "A deaf woman with a troubled past returns to her hometown and must confront old ties to the criminal underworld." },
-    { title: "Deadpool & Wolverine", type: "movie", year: 2024, month: 7, desc: "A wisecracking mercenary teams up with a reluctant, clawed anti-hero on a multiverse-spanning mission." },
-    { title: "Agatha All Along", type: "show", year: 2024, month: 9, desc: "A powerful witch stripped of her magic sets off down a mysterious road with a group of unlikely companions." },
-    { title: "Daredevil: Born Again Season 1", type: "show", year: 2025, month: 3, desc: "A lawyer by day and vigilante by night finds his double life colliding once again with an old enemy turned politician." },
-    { title: "Captain America: Brave New World", type: "movie", year: 2025, month: 2, desc: "The new shield-bearer finds himself at the center of an international incident and a personal conspiracy." },
-    { title: "Thunderbolts*", type: "movie", year: 2025, month: 5, desc: "A misfit group of antiheroes is thrown together on a dangerous mission with an uncertain agenda behind it." },
-    { title: "Ironheart", type: "show", year: 2025, month: 6, desc: "A brilliant young inventor builds her own high-tech suit and gets pulled into a world of danger because of it." },
-    { title: "The Fantastic Four: First Steps", type: "movie", year: 2025, month: 7, desc: "A family of explorers gains extraordinary abilities and must protect their world from a cosmic-scale threat." },
-    { title: "Wonder Man", type: "show", year: 2026, month: null, desc: "An actor and stuntman gets drawn into a strange chapter of his life connected to a famous, powerful name." },
-    { title: "Daredevil: Born Again Season 2", type: "show", year: 2026, month: null, desc: "TBA — release date not yet confirmed." },
-    { title: "Vision Quest", type: "show", year: 2026, month: null, desc: "A synthetic being searches for identity and connection as he tries to rebuild a sense of self." },
-    { title: "Spider-Man: Brand New Day", type: "movie", year: 2026, month: 7, desc: "A young hero's world shifts again as he navigates new relationships and a fresh set of threats." },
-    { title: "Avengers: Doomsday", type: "movie", year: 2026, month: 12, desc: "A new, dangerous adversary forces heroes old and new to come together against overwhelming odds." },
-    { title: "Avengers: Secret Wars", type: "movie", year: 2027, month: 12, desc: "TBA — plot details under wraps ahead of this two-part finale event." },
+    { title: "Iron Man", type: "movie", year: 2008, month: 5, desc: "A billionaire inventor builds a powerful suit of armor after a life changing event and decides to use his technology to protect others." },
+
+    { title: "The Incredible Hulk", type: "movie", year: 2008, month: 6, desc: "A scientist searches for a cure while staying one step ahead of those who want to turn his condition into a weapon." },
+
+    { title: "Iron Man 2", type: "movie", year: 2010, month: 5, desc: "As new enemies emerge and political pressure grows, Tony Stark faces challenges that test both his technology and himself." },
+
+    { title: "Thor", type: "movie", year: 2011, month: 5, desc: "A proud prince is cast out of his kingdom and must learn humility before he can reclaim his place." },
+
+    { title: "Captain America: The First Avenger", type: "movie", year: 2011, month: 7, desc: "A determined young man becomes a super soldier during World War II and fights a dangerous enemy organization." },
+
+    { title: "The Avengers", type: "movie", year: 2012, month: 5, desc: "Earth's greatest heroes unite for the first time to stop an invasion that threatens the entire planet." },
+
+    { title: "Iron Man 3", type: "movie", year: 2013, month: 5, desc: "Haunted by recent events, Tony Stark must rely on his ingenuity after a mysterious terrorist attacks his world." },
+
+    { title: "Thor: The Dark World", type: "movie", year: 2013, month: 11, desc: "Thor faces an ancient enemy whose return threatens the Nine Realms and everyone he cares about." },
+
+    { title: "Captain America: The Winter Soldier", type: "movie", year: 2014, month: 4, desc: "Steve Rogers uncovers a dangerous conspiracy hidden within the organization he trusts most." },
+
+    { title: "Guardians of the Galaxy", type: "movie", year: 2014, month: 8, desc: "A group of unlikely outlaws joins forces to protect a mysterious object from falling into the wrong hands." },
+
+    { title: "Avengers: Age of Ultron", type: "movie", year: 2015, month: 5, desc: "An attempt to create global peace instead unleashes a powerful new threat that endangers humanity." },
+
+    { title: "Ant-Man", type: "movie", year: 2015, month: 7, desc: "A skilled thief receives incredible technology and a chance to become an unexpected hero." },
+
+    { title: "Captain America: Civil War", type: "movie", year: 2016, month: 5, desc: "Political conflict divides the Avengers and forces old friends onto opposing sides." },
+
+    { title: "Doctor Strange", type: "movie", year: 2016, month: 11, desc: "After a devastating accident, a brilliant surgeon enters a hidden world of magic and ancient knowledge." },
+
+    { title: "Guardians of the Galaxy Vol. 2", type: "movie", year: 2017, month: 5, desc: "The Guardians face new dangers while uncovering long buried truths about one of their own." },
+
+    { title: "Spider-Man: Homecoming", type: "movie", year: 2017, month: 7, desc: "Peter Parker balances high school life with the responsibility of proving himself as a superhero." },
+
+    { title: "Thor: Ragnarok", type: "movie", year: 2017, month: 11, desc: "Thor must escape a distant world and stop an ancient force before his home is destroyed." },
+
+    { title: "Black Panther", type: "movie", year: 2018, month: 2, desc: "The new king of Wakanda returns home to defend his nation from a powerful challenger." },
+
+    { title: "Avengers: Infinity War", type: "movie", year: 2018, month: 4, desc: "Heroes from across the universe unite against a cosmic warlord seeking ultimate power." },
+
+    { title: "Ant-Man and the Wasp", type: "movie", year: 2018, month: 7, desc: "A rescue mission draws Scott Lang and Hope van Dyne into the mysterious Quantum Realm." },
+
+    { title: "Captain Marvel", type: "movie", year: 2019, month: 3, desc: "A powerful warrior uncovers the truth about her past while caught in an intergalactic conflict." },
+
+    { title: "Avengers: Endgame", type: "movie", year: 2019, month: 4, desc: "The surviving heroes come together for one final mission to restore what was lost." },
+
+    { title: "Spider-Man: Far From Home", type: "movie", year: 2019, month: 7, desc: "Peter Parker's European vacation is interrupted by unexpected threats and a mysterious new ally." },
+
+    { title: "WandaVision", type: "show", year: 2021, month: 1, desc: "Wanda Maximoff and Vision find themselves living an unusual suburban life where reality does not seem quite right." },
+
+    { title: "The Falcon and the Winter Soldier", type: "show", year: 2021, month: 3, desc: "Sam Wilson and Bucky Barnes embark on a global mission while confronting the legacy of Captain America." },
+
+    { title: "Loki Season 1", type: "show", year: 2021, month: 6, desc: "An alternate version of Loki is recruited by a mysterious organization responsible for protecting the timeline." },
+
+    { title: "Black Widow", type: "movie", year: 2021, month: 7, desc: "Natasha Romanoff reunites with figures from her past while confronting a dangerous conspiracy." },
+
+    { title: "Shang-Chi and the Legend of the Ten Rings", type: "movie", year: 2021, month: 9, desc: "A skilled martial artist is drawn back into the secretive world he tried to leave behind." },
+
+    { title: "Eternals", type: "movie", year: 2021, month: 11, desc: "A hidden group of immortal heroes reunites after centuries to face an ancient threat." },
+
+    { title: "Hawkeye", type: "show", year: 2021, month: 11, desc: "Clint Barton teams up with a determined young archer during an eventful holiday season." },
+
+    { title: "Spider-Man: No Way Home", type: "movie", year: 2021, month: 12, desc: "A magical spell has unexpected consequences that change Peter Parker's life forever." },
+
+    { title: "Moon Knight", type: "show", year: 2022, month: 3, desc: "A man struggling with mysterious blackouts discovers he is connected to an ancient Egyptian power." },
+
+    { title: "Doctor Strange in the Multiverse of Madness", type: "movie", year: 2022, month: 5, desc: "Doctor Strange journeys across dangerous realities to protect a young girl with extraordinary abilities." },
+
+    { title: "Ms. Marvel", type: "show", year: 2022, month: 6, desc: "A teenager and lifelong superhero fan discovers that she has powers of her own." },
+
+    { title: "Thor: Love and Thunder", type: "movie", year: 2022, month: 7, desc: "Thor reunites with old friends to stop a dangerous enemy who is hunting gods across the universe." },
+
+    { title: "She-Hulk: Attorney at Law", type: "show", year: 2022, month: 8, desc: "A lawyer gains Hulk like abilities while trying to balance her professional and personal life." },
+
+    { title: "Werewolf by Night", type: "movie", year: 2022, month: 10, desc: "Monster hunters gather for a deadly competition after the death of their legendary leader." },
+
+    { title: "Black Panther: Wakanda Forever", type: "movie", year: 2022, month: 11, desc: "Wakanda faces powerful new threats while honoring the legacy of its fallen king." },
+
+    { title: "The Guardians of the Galaxy Holiday Special", type: "movie", year: 2022, month: 11, desc: "The Guardians set out to give Peter Quill an unforgettable holiday celebration." },
+
+    { title: "Ant-Man and the Wasp: Quantumania", type: "movie", year: 2023, month: 2, desc: "A family adventure leads deep into the Quantum Realm where a dangerous new enemy awaits." },
+
+    { title: "Guardians of the Galaxy Vol. 3", type: "movie", year: 2023, month: 5, desc: "The Guardians undertake one final mission to save one of their own." },
+
+    { title: "Secret Invasion", type: "show", year: 2023, month: 6, desc: "Nick Fury uncovers a secret infiltration that threatens the safety of Earth." },
+
+    { title: "Loki Season 2", type: "show", year: 2023, month: 10, desc: "Loki and his allies race to prevent the collapse of the timelines." },
+
+    { title: "The Marvels", type: "movie", year: 2023, month: 11, desc: "Three heroes discover their powers have become mysteriously connected, forcing them to work together." },
+
+    { title: "Echo", type: "show", year: 2024, month: 1, desc: "Maya Lopez returns home and confronts the consequences of her past." },
+
+    { title: "Deadpool & Wolverine", type: "movie", year: 2024, month: 7, desc: "Deadpool's ordinary life is disrupted when he is pulled into an unexpected mission alongside Wolverine." },
+
+    { title: "Agatha All Along", type: "show", year: 2024, month: 9, desc: "Agatha Harkness embarks on a dangerous journey to regain what she has lost." },
+
+    { title: "Captain America: Brave New World", type: "movie", year: 2025, month: 2, desc: "Sam Wilson faces an international crisis that places him at the center of a dangerous global conspiracy." },
+
+    { title: "Daredevil: Born Again Season 1", type: "show", year: 2025, month: 3, desc: "Matt Murdock returns to the streets of New York as his personal and professional lives collide with an old enemy." },
+
+    { title: "Thunderbolts*", type: "movie", year: 2025, month: 5, desc: "A group of unlikely antiheroes is brought together for a mission that forces them to confront their pasts." },
+
+    { title: "Ironheart", type: "show", year: 2025, month: 6, desc: "A brilliant young inventor builds an advanced suit of armor and finds herself caught between technology and magic." },
+
+    { title: "The Fantastic Four: First Steps", type: "movie", year: 2025, month: 7, desc: "Marvel's first family begins a new adventure as they face a threat unlike anything they have encountered before." },
+
+    { title: "Wonder Man", type: "show", year: 2025, month: 12, desc: "An aspiring Hollywood actor unexpectedly finds himself connected to the world of superheroes." },
+
+    { title: "Vision Quest", type: "show", year: 2026, month: 9, desc: "Vision continues his search for identity while trying to understand who he truly is." },
+
+    { title: "Daredevil: Born Again Season 2", type: "show", year: 2026, month: 3, desc: "Matt Murdock's story continues as new challenges await both the lawyer and the vigilante." },
+
+    { title: "Spider-Man: Brand New Day", type: "movie", year: 2026, month: 7, desc: "Peter Parker begins a new chapter as Spider-Man while facing new responsibilities and new threats." },
+
+    { title: "Avengers: Doomsday", type: "movie", year: 2026, month: 12, desc: "Heroes from across the Marvel Cinematic Universe unite against a powerful new enemy that threatens everything." },
+
+    { title: "Avengers: Secret Wars", type: "movie", year: 2027, month: 12, desc: "The Multiverse Saga reaches its climactic conclusion as heroes from across realities fight for the fate of existence." }
+
   ],
+
   "Netflix Saga": [
     { title: "Daredevil Season 1", type: "show", year: 2015, month: 4, desc: "A blind lawyer by day becomes a masked vigilante by night to clean up the crime-ridden streets of his neighborhood." },
     { title: "Jessica Jones Season 1", type: "show", year: 2015, month: 11, desc: "A hard-drinking private investigator with hidden powers is pulled back into a nightmare from her past." },
