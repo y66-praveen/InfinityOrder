@@ -27,7 +27,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-image: linear-gradient(rgba(11,13,18,0.94), rgba(11,13,18,0.94)), url("assets/bg.jpg");
+  background-image: linear-gradient(rgba(11,13,18,0.94), rgba(11,13,18,0.94)), url("bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -40,6 +40,17 @@ body {
   border-bottom: 2px solid var(--red);
   background: linear-gradient(180deg, rgba(20,23,31,0.7), rgba(11,13,18,0.4));
 }
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.brand-logo {
+  height: 70px;
+  width: auto;
+  opacity: 0.95;
+}
 .site-header h1 {
   margin: 0;
   font-size: 2.1rem;
@@ -49,6 +60,38 @@ body {
 }
 .site-header h1 span { color: var(--gold); }
 .tagline { color: var(--text-dim); margin-top: 8px; font-size: 0.95rem; }
+
+/* Mobile saga navigation */
+.menu-toggle {
+  display: none;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  transform: translateY(-50%);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.menu-toggle:hover, .menu-toggle:focus-visible { border-color: var(--gold); outline: none; }
+.menu-toggle span {
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gold);
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+.menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .saga-tabs {
   display: flex;
@@ -254,6 +297,18 @@ body {
 }
 .item-checkbox:checked + .checkbox-visual svg { opacity: 1; transform: scale(1); }
 
+.upcoming-tag {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  padding: 4px 10px;
+  border-radius: 10px;
+  border: 1px dashed var(--text-dim);
+  color: var(--text-dim);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
 .empty-msg { text-align: center; color: var(--text-dim); padding: 40px 0; }
 
 /* Modal */
@@ -347,6 +402,7 @@ body {
 
 /* Responsive */
 @media (max-width: 600px) {
+  .brand-logo { height: 30px; }
   .site-header h1 { font-size: 1.5rem; }
   .tagline { font-size: 0.82rem; }
   .tab-btn { padding: 8px 13px; font-size: 0.8rem; }
@@ -364,4 +420,41 @@ body {
 @media (max-width: 380px) {
   .item-type-badge { display: none; }
   .progress-bar-wrap { flex-wrap: wrap; }
+}
+
+/* On phones the saga tabs become a smooth, full-width menu. */
+@media (max-width: 767px) {
+  .site-header { position: relative; padding: 24px 68px 16px 20px; }
+  .site-header .brand { justify-content: flex-start; }
+  .site-header .tagline { text-align: left; }
+  .menu-toggle { display: flex; }
+  .saga-tabs {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 8px;
+    max-height: 0;
+    margin: 0;
+    padding: 0 16px;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: max-height 0.32s ease, opacity 0.2s ease, padding 0.32s ease;
+  }
+  .saga-tabs.mobile-open {
+    max-height: 700px;
+    padding: 14px 16px 0;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .tab-btn { width: 100%; border-radius: 10px; padding: 11px 14px; }
+}
+
+/* Desktop and tablet retain the original tab layout. */
+@media (min-width: 768px) {
+  .saga-tabs {
+    max-height: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
 }

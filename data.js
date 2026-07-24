@@ -107,7 +107,7 @@ const DATA = {
 
     { title: "The Fantastic Four: First Steps", type: "movie", year: 2025, month: 7, desc: "Marvel's first family begins a new adventure as they face a threat unlike anything they have encountered before." },
 
-    { title: "Wonder Man", type: "show", year: 2025, month: 12, desc: "An aspiring Hollywood actor unexpectedly finds himself connected to the world of superheroes." },
+    { title: "Wonder Man", type: "show", year: 2026, month: 1, desc: "An aspiring Hollywood actor unexpectedly finds himself connected to the world of superheroes." },
 
     { title: "Vision Quest", type: "show", year: 2026, month: 9, desc: "Vision continues his search for identity while trying to understand who he truly is." },
 
@@ -145,7 +145,7 @@ const DATA = {
   ],
   "Alternate Animated": [
     { title: "X-Men '97", type: "show", year: 2024, month: 3, desc: "A beloved animated team of mutants continues its story into new territory, honoring its 90s roots." },
-    { title: "Your Friendly Neighborhood Spider-Man Season 1", type: "show", year: 2026, month: null, desc: "A fresh animated take on a young hero's earliest days learning what it means to wear the mask." },
+    { title: "Your Friendly Neighborhood Spider-Man Season 1", type: "show", year: 2025, month: 1, desc: "A fresh animated take on a young hero's earliest days learning what it means to wear the mask." },
   ],
   "Fox X-Men Universe": [
     { title: "X-Men", type: "movie", year: 2000, month: 7, desc: "A group of mutants with extraordinary abilities bands together to prevent an all-out war between mutants and humans." },

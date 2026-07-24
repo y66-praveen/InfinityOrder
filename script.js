@@ -17,6 +17,7 @@ const sortBtn = document.getElementById("sortBtn");
 const sortLabel = document.getElementById("sortLabel");
 const sortIcon = document.getElementById("sortIcon");
 const scrollTopBtn = document.getElementById("scrollTopBtn");
+const menuToggle = document.getElementById("menuToggle");
 
 const modalOverlay = document.getElementById("modalOverlay");
 const modalClose = document.getElementById("modalClose");
@@ -34,6 +35,16 @@ function formatDate(item) {
 
 function sortValue(item) {
   return item.year * 100 + (item.month || 13);
+}
+
+function isReleased(item) {
+  if (!item.month) return false; // no confirmed date yet
+  const now = new Date();
+  const curYear = now.getFullYear();
+  const curMonth = now.getMonth() + 1;
+  if (item.year > curYear) return false;
+  if (item.year === curYear && item.month > curMonth) return false;
+  return true;
 }
 
 function getWatched() {
@@ -75,12 +86,27 @@ function renderTabs() {
       currentTypeFilter = "all";
       searchInput.value = "";
       searchQuery = "";
+      closeMobileMenu();
       renderTabs();
       renderTypeFilters();
       renderList();
     });
     sagaTabsEl.appendChild(btn);
   });
+}
+
+function closeMobileMenu() {
+  sagaTabsEl.classList.remove("mobile-open");
+  menuToggle.classList.remove("active");
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.setAttribute("aria-label", "Open saga navigation");
+}
+
+function toggleMobileMenu() {
+  const isOpen = sagaTabsEl.classList.toggle("mobile-open");
+  menuToggle.classList.toggle("active", isOpen);
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.setAttribute("aria-label", isOpen ? "Close saga navigation" : "Open saga navigation");
 }
 
 function renderTypeFilters() {
@@ -135,6 +161,13 @@ function renderList() {
       card.className = "item-card" + (isWatched ? " watched" : "");
 
       const sagaTag = currentSaga === ALL_TAB ? `<span class="item-saga-tag">${item.saga}</span>` : "";
+      const released = isReleased(item);
+      const checkboxArea = released
+        ? `<label class="item-checkbox-wrap">
+             <input type="checkbox" class="item-checkbox" ${isWatched ? "checked" : ""}>
+             <span class="checkbox-visual">${CHECK_SVG}</span>
+           </label>`
+        : `<span class="upcoming-tag">TBR</span>`;
 
       card.innerHTML = `
         <span class="item-no">${idx + 1}.</span>
@@ -143,17 +176,17 @@ function renderList() {
           <span class="item-date">${formatDate(item)}</span>
         </div>
         <span class="item-type-badge ${item.type}">${item.type}</span>
-        <label class="item-checkbox-wrap">
-          <input type="checkbox" class="item-checkbox" ${isWatched ? "checked" : ""}>
-          <span class="checkbox-visual">${CHECK_SVG}</span>
-        </label>
+        ${checkboxArea}
       `;
 
-      card.querySelector(".item-checkbox").addEventListener("change", (e) => {
-        setWatched(key, e.target.checked);
-        card.classList.toggle("watched", e.target.checked);
-        updateProgress();
-      });
+      const checkboxInput = card.querySelector(".item-checkbox");
+      if (checkboxInput) {
+        checkboxInput.addEventListener("change", (e) => {
+          setWatched(key, e.target.checked);
+          card.classList.toggle("watched", e.target.checked);
+          updateProgress();
+        });
+      }
 
       card.querySelector(".item-title-link").addEventListener("click", () => openModal(item));
 
@@ -190,7 +223,15 @@ modalOverlay.addEventListener("click", (e) => {
   if (e.target === modalOverlay) closeModal();
 });
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeModal();
+  if (e.key === "Escape") {
+    closeModal();
+    closeMobileMenu();
+  }
+});
+
+menuToggle.addEventListener("click", toggleMobileMenu);
+window.addEventListener("resize", () => {
+  if (window.innerWidth >= 768) closeMobileMenu();
 });
 
 searchInput.addEventListener("input", (e) => {
