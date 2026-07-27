@@ -164,7 +164,7 @@ const DATA = {
     { title: "Dark Phoenix", type: "movie", year: 2019, month: 6, desc: "A powerful mutant's abilities spiral out of control after a cosmic force awakens something within her." },
     { title: "The New Mutants", type: "movie", year: 2020, month: 8, desc: "A group of young mutants held in a secretive facility must confront their pasts and their own abilities." },
   ],
-  "Spider-Verse": [
+  "Spider Nexus": [
     { title: "Spider-Man", type: "movie", year: 2002, month: 5, group: "🕷️ Raimi Universe (Earth-96283) — Tobey Maguire", desc: "A shy high schooler gains extraordinary abilities and learns that great power comes with great responsibility." },
     { title: "Spider-Man 2", type: "movie", year: 2004, month: 6, group: "🕷️ Raimi Universe (Earth-96283) — Tobey Maguire", desc: "Torn between his personal life and his duty as a hero, a young man faces a brilliant scientist turned villain." },
     { title: "Spider-Man 3", type: "movie", year: 2007, month: 5, group: "🕷️ Raimi Universe (Earth-96283) — Tobey Maguire", desc: "A hero is pushed to his darkest limits by an alien symbiote and a growing list of enemies from his past." },
