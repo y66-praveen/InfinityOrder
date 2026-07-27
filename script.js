@@ -1,5 +1,6 @@
 const MONTHS = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const ALL_TAB = "All";
+const GROUPED_TABS = ["Spider Nexus", "Ultimate Brand New Day Watch Order"];
 
 let currentSaga = ALL_TAB;
 let currentTypeFilter = "all";
@@ -62,7 +63,10 @@ function itemKey(saga, title) {
 function getAllItemsMerged() {
   const merged = [];
   Object.keys(DATA).forEach(saga => {
-    DATA[saga].forEach(item => merged.push({ ...item, saga }));
+    DATA[saga].forEach(item => {
+      if (item.linkSaga) return; // already represented under its original saga
+      merged.push({ ...item, saga });
+    });
   });
   return merged;
 }
@@ -71,7 +75,7 @@ function getCurrentSagaItems() {
   if (currentSaga === ALL_TAB) {
     return getAllItemsMerged();
   }
-  return DATA[currentSaga].map(item => ({ ...item, saga: currentSaga }));
+  return DATA[currentSaga].map(item => ({ ...item, saga: item.linkSaga || currentSaga }));
 }
 
 function renderTabs() {
@@ -114,6 +118,8 @@ function renderTypeFilters() {
   const hasMovies = items.some(i => i.type === "movie");
   const hasShows = items.some(i => i.type === "show");
 
+  sortBtn.classList.toggle("hidden", currentSaga === "Ultimate Brand New Day Watch Order");
+
   if (!(hasMovies && hasShows)) {
     typeFiltersEl.classList.add("hidden");
     return;
@@ -134,6 +140,46 @@ function renderTypeFilters() {
   });
 }
 
+function buildItemCard(item, no, watched) {
+  const key = itemKey(item.saga, item.title);
+  const isWatched = !!watched[key];
+
+  const card = document.createElement("div");
+  card.className = "item-card" + (isWatched ? " watched" : "");
+
+  const sagaTag = currentSaga === ALL_TAB ? `<span class="item-saga-tag">${item.saga}</span>` : "";
+  const released = isReleased(item);
+  const checkboxArea = released
+    ? `<label class="item-checkbox-wrap">
+         <input type="checkbox" class="item-checkbox" ${isWatched ? "checked" : ""}>
+         <span class="checkbox-visual">${CHECK_SVG}</span>
+       </label>`
+    : `<span class="upcoming-tag">TBR</span>`;
+
+  card.innerHTML = `
+    <span class="item-no">${no}.</span>
+    <div class="item-main">
+      <a class="item-title-link">${item.title}</a>${sagaTag}
+      <span class="item-date">${formatDate(item)}</span>
+    </div>
+    <span class="item-type-badge ${item.type}">${item.type}</span>
+    ${checkboxArea}
+  `;
+
+  const checkboxInput = card.querySelector(".item-checkbox");
+  if (checkboxInput) {
+    checkboxInput.addEventListener("change", (e) => {
+      setWatched(key, e.target.checked);
+      card.classList.toggle("watched", e.target.checked);
+      updateProgress();
+    });
+  }
+
+  card.querySelector(".item-title-link").addEventListener("click", () => openModal(item));
+
+  return card;
+}
+
 function renderList() {
   const watched = getWatched();
   let items = getCurrentSagaItems();
@@ -146,51 +192,50 @@ function renderList() {
     items = items.filter(i => i.title.toLowerCase().includes(q));
   }
 
-  items.sort((a, b) => sortDir === "asc" ? sortValue(a) - sortValue(b) : sortValue(b) - sortValue(a));
-
   listContainer.innerHTML = "";
 
   if (items.length === 0) {
     listContainer.innerHTML = `<div class="empty-msg">No titles match.</div>`;
-  } else {
-    items.forEach((item, idx) => {
-      const key = itemKey(item.saga, item.title);
-      const isWatched = !!watched[key];
+    updateProgress();
+    return;
+  }
 
-      const card = document.createElement("div");
-      card.className = "item-card" + (isWatched ? " watched" : "");
+  const isGroupedTab = GROUPED_TABS.includes(currentSaga);
+  let runningNo = 0;
 
-      const sagaTag = currentSaga === ALL_TAB ? `<span class="item-saga-tag">${item.saga}</span>` : "";
-      const released = isReleased(item);
-      const checkboxArea = released
-        ? `<label class="item-checkbox-wrap">
-             <input type="checkbox" class="item-checkbox" ${isWatched ? "checked" : ""}>
-             <span class="checkbox-visual">${CHECK_SVG}</span>
-           </label>`
-        : `<span class="upcoming-tag">TBR</span>`;
+  if (isGroupedTab) {
+    const orderedGroupNames = [];
+    const grouped = {};
+    items.forEach(item => {
+      const g = item.group || "";
+      if (!grouped[g]) { grouped[g] = []; orderedGroupNames.push(g); }
+      grouped[g].push(item);
+    });
 
-      card.innerHTML = `
-        <span class="item-no">${idx + 1}.</span>
-        <div class="item-main">
-          <a class="item-title-link">${item.title}</a>${sagaTag}
-          <span class="item-date">${formatDate(item)}</span>
-        </div>
-        <span class="item-type-badge ${item.type}">${item.type}</span>
-        ${checkboxArea}
-      `;
+    orderedGroupNames.forEach(gName => {
+      const usesFixedOrder = grouped[gName].some(i => typeof i.order === "number");
+      const groupItems = grouped[gName].slice().sort((a, b) => {
+        if (usesFixedOrder) return (a.order || 0) - (b.order || 0);
+        return sortDir === "asc" ? sortValue(a) - sortValue(b) : sortValue(b) - sortValue(a);
+      });
 
-      const checkboxInput = card.querySelector(".item-checkbox");
-      if (checkboxInput) {
-        checkboxInput.addEventListener("change", (e) => {
-          setWatched(key, e.target.checked);
-          card.classList.toggle("watched", e.target.checked);
-          updateProgress();
-        });
+      if (gName) {
+        const heading = document.createElement("div");
+        heading.className = "group-heading";
+        heading.textContent = gName;
+        listContainer.appendChild(heading);
       }
 
-      card.querySelector(".item-title-link").addEventListener("click", () => openModal(item));
-
-      listContainer.appendChild(card);
+      groupItems.forEach(item => {
+        runningNo++;
+        listContainer.appendChild(buildItemCard(item, runningNo, watched));
+      });
+    });
+  } else {
+    items.sort((a, b) => sortDir === "asc" ? sortValue(a) - sortValue(b) : sortValue(b) - sortValue(a));
+    items.forEach(item => {
+      runningNo++;
+      listContainer.appendChild(buildItemCard(item, runningNo, watched));
     });
   }
 

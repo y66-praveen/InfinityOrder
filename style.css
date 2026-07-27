@@ -152,6 +152,7 @@ body {
   font-size: 0.82rem;
 }
 .sort-btn:hover { color: var(--gold); border-color: var(--gold); }
+.sort-btn.hidden { display: none; }
 #sortIcon { font-size: 0.9rem; }
 
 .search-box input {
@@ -236,6 +237,18 @@ body {
   text-align: right;
   flex-shrink: 0;
 }
+
+.group-heading {
+  margin: 22px 0 4px;
+  padding: 0 2px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+.group-heading:first-child { margin-top: 4px; }
 
 .item-main { flex: 1; min-width: 0; }
 .item-title-link {
