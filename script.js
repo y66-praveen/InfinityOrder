@@ -2,6 +2,19 @@ const MONTHS = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep
 const ALL_TAB = "All";
 const GROUPED_TABS = ["Spider Nexus", "Ultimate Brand New Day Watch Order"];
 
+const THEME_KEY = "infinity_order_theme";
+const themeToggle = document.getElementById("themeToggle");
+function applyTheme(theme) {
+  if (theme === "dark") document.documentElement.setAttribute("data-theme", "dark");
+  else document.documentElement.removeAttribute("data-theme");
+}
+themeToggle.addEventListener("click", () => {
+  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+  const next = isDark ? "light" : "dark";
+  applyTheme(next);
+  try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+});
+
 let currentSaga = ALL_TAB;
 let currentTypeFilter = "all";
 let searchQuery = "";
@@ -23,9 +36,13 @@ const menuToggle = document.getElementById("menuToggle");
 const modalOverlay = document.getElementById("modalOverlay");
 const modalClose = document.getElementById("modalClose");
 const modalTitle = document.getElementById("modalTitle");
-const modalDate = document.getElementById("modalDate");
 const modalDesc = document.getElementById("modalDesc");
 const modalBadge = document.getElementById("modalBadge");
+const modalMetaRow = document.getElementById("modalMetaRow");
+const modalPoster = document.getElementById("modalPoster");
+const modalPosterIcon = document.getElementById("modalPosterIcon");
+const modalPrev = document.getElementById("modalPrev");
+const modalNext = document.getElementById("modalNext");
 
 const CHECK_SVG = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12.5L9.5 18L20 6" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
@@ -33,6 +50,23 @@ function formatDate(item) {
   if (!item.month) return `${item.year} (TBA)`;
   return `${MONTHS[item.month]} ${item.year}`;
 }
+
+function formatRuntime(item) {
+  if (item.runtime == null) return "TBA";
+  if (item.episodes) {
+    const totalMin = item.runtime * item.episodes;
+    const h = Math.floor(totalMin / 60), m = totalMin % 60;
+    return `${item.episodes} eps · ~${item.runtime}m each (≈${h}h ${m}m total)`;
+  }
+  const h = Math.floor(item.runtime / 60), m = item.runtime % 60;
+  return h > 0 ? `${h}h ${m}m` : `${m}m`;
+}
+
+const ICON_CALENDAR = `<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5.5" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 9.5H20M8 3.5V6.5M16 3.5V6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+const ICON_CLOCK = `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M12 7.5V12L15 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const ICON_LAYERS = `<svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5L20.5 8L12 12.5L3.5 8L12 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M3.5 12L12 16.5L20.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.5 16L12 20.5L20.5 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const ICON_FILM = `<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 4V20M16 4V20M3 9H8M16 9H21M3 15H8M16 15H21" stroke="currentColor" stroke-width="1.5"/></svg>`;
+const ICON_TV = `<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 21H16M9 3L12 6L15 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 function sortValue(item) {
   return item.year * 100 + (item.month || 13);
@@ -175,10 +209,16 @@ function buildItemCard(item, no, watched) {
     });
   }
 
-  card.querySelector(".item-title-link").addEventListener("click", () => openModal(item));
+  const navIndex = modalNavList.length - 1;
+  card.querySelector(".item-title-link").addEventListener("click", () => {
+    openModalByIndex(navIndex);
+  });
 
   return card;
 }
+
+let modalNavList = [];
+let modalNavIndex = -1;
 
 function renderList() {
   const watched = getWatched();
@@ -193,6 +233,7 @@ function renderList() {
   }
 
   listContainer.innerHTML = "";
+  modalNavList = [];
 
   if (items.length === 0) {
     listContainer.innerHTML = `<div class="empty-msg">No titles match.</div>`;
@@ -228,6 +269,7 @@ function renderList() {
 
       groupItems.forEach(item => {
         runningNo++;
+        modalNavList.push(item);
         listContainer.appendChild(buildItemCard(item, runningNo, watched));
       });
     });
@@ -235,6 +277,7 @@ function renderList() {
     items.sort((a, b) => sortDir === "asc" ? sortValue(a) - sortValue(b) : sortValue(b) - sortValue(a));
     items.forEach(item => {
       runningNo++;
+      modalNavList.push(item);
       listContainer.appendChild(buildItemCard(item, runningNo, watched));
     });
   }
@@ -252,16 +295,37 @@ function updateProgress() {
   progressFill.style.width = pct + "%";
 }
 
+function openModalByIndex(idx) {
+  if (idx < 0 || idx >= modalNavList.length) return;
+  modalNavIndex = idx;
+  openModal(modalNavList[idx]);
+}
+
 function openModal(item) {
   modalBadge.textContent = item.type;
   modalTitle.textContent = item.title;
-  modalDate.textContent = formatDate(item);
   modalDesc.textContent = item.desc;
+
+  modalPoster.className = "modal-poster " + (item.type === "movie" ? "poster-movie" : "poster-show");
+  modalPosterIcon.innerHTML = item.type === "movie" ? ICON_FILM : ICON_TV;
+
+  modalMetaRow.innerHTML = `
+    <span class="modal-meta-item">${ICON_CALENDAR}${formatDate(item)}</span>
+    <span class="modal-meta-item">${ICON_CLOCK}${formatRuntime(item)}</span>
+    <span class="modal-meta-item">${ICON_LAYERS}${item.saga}</span>
+  `;
+
+  modalPrev.disabled = modalNavIndex <= 0;
+  modalNext.disabled = modalNavIndex >= modalNavList.length - 1;
+
   modalOverlay.classList.add("open");
 }
 function closeModal() {
   modalOverlay.classList.remove("open");
 }
+
+modalPrev.addEventListener("click", () => openModalByIndex(modalNavIndex - 1));
+modalNext.addEventListener("click", () => openModalByIndex(modalNavIndex + 1));
 
 modalClose.addEventListener("click", closeModal);
 modalOverlay.addEventListener("click", (e) => {
@@ -271,6 +335,10 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     closeModal();
     closeMobileMenu();
+  }
+  if (modalOverlay.classList.contains("open")) {
+    if (e.key === "ArrowLeft") openModalByIndex(modalNavIndex - 1);
+    if (e.key === "ArrowRight") openModalByIndex(modalNavIndex + 1);
   }
 });
 

@@ -119,7 +119,21 @@ const DATA = {
 
     { title: "Avengers: Doomsday", type: "movie", year: 2026, month: 12, desc: "Heroes from across the Marvel Cinematic Universe unite against a powerful new enemy that threatens everything." },
 
-    { title: "Avengers: Secret Wars", type: "movie", year: 2027, month: 12, desc: "The Multiverse Saga reaches its climactic conclusion as heroes from across realities fight for the fate of existence." }
+    { title: "Avengers: Secret Wars", type: "movie", year: 2027, month: 12, desc: "The Multiverse Saga reaches its climactic conclusion as heroes from across realities fight for the fate of existence." },
+    {
+      title: "Ghost Rider",
+      type: "movie",
+      year: 2028,
+      month: null,
+      desc: "Marvel Studios introduces Ghost Rider to the Marvel Cinematic Universe in a supernatural adventure centered around the legendary Spirit of Vengeance. Officially announced at San Diego Comic Con 2026, the film stars Ryan Gosling and is directed by Shawn Levy. While Marvel has not revealed story details or confirmed which version of Ghost Rider will appear, the film is expected to explore the darker, mystical side of the MCU with blazing action, demonic forces, and a new supernatural hero unlike any seen before."
+    },
+    {
+      title: "Black Panther III",
+      type: "movie",
+      year: 2028,
+      month: 12,
+      desc: "The next chapter of Wakanda continues under the direction of Ryan Coogler, expanding the legacy of the Black Panther for a new generation. Officially announced at San Diego Comic Con 2026, the film features Letitia Wright and Winston Duke returning, with David Jonsson joining as a new Black Panther. Beyond these announcements, Marvel has kept the story tightly under wraps, teasing only that Wakanda's future will face new challenges while honoring the legacy that came before."
+    },
 
   ],
 
@@ -144,10 +158,32 @@ const DATA = {
     { title: "What If...? Season 3", type: "show", year: 2024, month: 12, desc: "The anthology series wraps up its exploration of the multiverse with a run of standalone alternate stories." },
     { title: "Marvel Zombies", type: "show", year: 2024, month: 10, desc: "A group of survivors bands together against a horde of the infected in a dark, action-horror spinoff." },
     { title: "Eyes of Wakanda", type: "show", year: 2025, month: 8, desc: "An anthology following Wakandan warriors on covert, dangerous missions across different eras of history." },
+    {
+      title: "I Am Groot Season 1",
+      type: "show",
+      year: 2022,
+      month: 8,
+      desc: "Baby Groot takes center stage in a collection of short adventures set during his early years with the Guardians of the Galaxy. As he explores the cosmos, his endless curiosity and playful nature lead to unexpected encounters, creative mischief, and charming moments that showcase one of Marvel's smallest heroes in his biggest spotlight yet."
+    },
+    {
+      title: "I Am Groot Season 2",
+      type: "show",
+      year: 2023,
+      month: 9,
+      desc: "Baby Groot returns for another collection of standalone adventures, venturing into strange corners of the galaxy aboard the Guardians' ships. Official previews tease new creatures, imaginative environments, and even more mischievous escapades as Groot's curiosity leads him into fresh cosmic trouble."
+    },
   ],
   "Alternate Animated": [
     { title: "X-Men '97", type: "show", year: 2024, month: 3, desc: "A beloved animated team of mutants continues its story into new territory, honoring its 90s roots." },
     { title: "Your Friendly Neighborhood Spider-Man Season 1", type: "show", year: 2025, month: 1, desc: "A fresh animated take on a young hero's earliest days learning what it means to wear the mask." },
+    {
+      title: "Your Friendly Neighborhood Spider-Man Season 2",
+      type: "show",
+      year: 2026,
+      month: null,
+      group: "🕷️ Alternate Spider-Man Universe",
+      desc: "Peter Parker's journey continues as new friendships, rivalries, and challenges shape his growth as Spider-Man. Official previews confirm the return of familiar allies while introducing Spider-Gwen, Venom, and more classic characters, expanding the series' unique alternate universe with higher stakes and deeper character dynamics."
+    },
   ],
   "Fox X-Men Universe": [
     { title: "X-Men", type: "movie", year: 2000, month: 7, desc: "A group of mutants with extraordinary abilities bands together to prevent an all-out war between mutants and humans." },
@@ -183,6 +219,14 @@ const DATA = {
     { title: "Spider-Man: Far From Home", type: "movie", year: 2019, month: 7, group: "🕷️ Marvel Cinematic Universe (MCU) — Tom Holland", desc: "A young hero's school trip abroad is interrupted when he's recruited to face a new elemental threat.", linkSaga: "Main MCU" },
     { title: "Spider-Man: No Way Home", type: "movie", year: 2021, month: 12, group: "🕷️ Marvel Cinematic Universe (MCU) — Tom Holland", desc: "A spell gone wrong tears open the multiverse, bringing new dangers and unexpected faces into a young hero's life.", linkSaga: "Main MCU" },
     { title: "Spider-Man: Brand New Day", type: "movie", year: 2026, month: 7, group: "🕷️ Marvel Cinematic Universe (MCU) — Tom Holland", desc: "A young hero's world shifts again as he navigates new relationships and a fresh set of threats.", linkSaga: "Main MCU" },
+    {
+      title: "Spider-Noir",
+      type: "show",
+      year: 2026,
+      month: 5,
+      group: "🕵️ Marvel Noir Universe (Earth-90214) - Nicolas Cage",
+      desc: "Set in a dark, black and white inspired version of 1930s New York, this live action series follows an aging private investigator with a hidden past as the city's only superhero. Starring Nicolas Cage, the series draws inspiration from the Spider-Noir comics while telling an original story within Marvel's Noir universe. Official previews tease a gritty detective mystery, organized crime, and a stylish pulp atmosphere unlike any previous Spider-Man adaptation."
+    },
   ],
   "Ultimate Brand New Day Watch Order": [
     { title: "Captain America: Civil War", type: "movie", year: 2016, month: 5, group: "⭐⭐⭐⭐⭐ Required", order: 1, desc: "A rift among heroes over accountability and freedom forces old allies onto opposing sides of a devastating conflict.", linkSaga: "Main MCU" },

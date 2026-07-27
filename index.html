@@ -4,13 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Infinity Order — MCU Watch Order Guide</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=4">
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem("infinity_order_theme");
+    var theme = saved === "dark" || saved === "light"
+      ? saved
+      : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    if (theme === "dark") document.documentElement.setAttribute("data-theme", "dark");
+  } catch (e) {}
+})();
+</script>
 </head>
 <body>
 
   <div class="bg-layer"></div>
 
   <header class="site-header">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M12 2.5V4.5M12 19.5V21.5M4.5 12H2.5M21.5 12H19.5M5.6 5.6L4.2 4.2M19.8 19.8L18.4 18.4M18.4 5.6L19.8 4.2M4.2 19.8L5.6 18.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+    </button>
     <div class="brand">
       <img src="logo.png" alt="Infinity Order logo" class="brand-logo">
       <h1>Infinity <span>Order</span></h1>
@@ -48,11 +68,26 @@
 
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-box">
-      <button class="modal-close" id="modalClose">&times;</button>
-      <span class="modal-badge" id="modalBadge"></span>
-      <h2 id="modalTitle"></h2>
-      <p class="modal-date" id="modalDate"></p>
-      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-poster" id="modalPoster">
+        <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+        <span class="modal-poster-icon" id="modalPosterIcon"></span>
+      </div>
+      <div class="modal-content">
+        <span class="modal-badge" id="modalBadge"></span>
+        <h2 id="modalTitle"></h2>
+        <div class="modal-meta-row" id="modalMetaRow"></div>
+        <p class="modal-desc" id="modalDesc"></p>
+      </div>
+      <div class="modal-nav">
+        <button class="modal-nav-btn" id="modalPrev" aria-label="Previous title">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 5L8 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Prev
+        </button>
+        <button class="modal-nav-btn" id="modalNext" aria-label="Next title">
+          Next
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -64,8 +99,8 @@
     </div>
   </footer>
 
-  <script src="data.js"></script>
-  <script src="script.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="script.js?v=4"></script>
   <!-- Cloudflare Web Analytics -->
    <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "10dd391399904fe49e1e7a307b0e7e62"}'></script>
    <!-- End Cloudflare Web Analytics -->
